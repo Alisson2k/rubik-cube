@@ -101,4 +101,18 @@ class Moviments:
 
         self.rotate(clockwise, self.rubik[4])
     
-    
+    def down(self, clockwise=True):
+        actual = copy.deepcopy(self.rubik)
+
+        if clockwise:
+            (self.rubik[0][6], self.rubik[0][7], self.rubik[0][8]) = (actual[1][6], actual[1][7], actual[1][8])
+            (self.rubik[1][6], self.rubik[1][7], self.rubik[1][8]) = (actual[2][6], actual[2][7], actual[2][8])
+            (self.rubik[2][6], self.rubik[2][7], self.rubik[2][8]) = (actual[3][6], actual[3][7], actual[3][8])
+            (self.rubik[3][6], self.rubik[3][7], self.rubik[3][8]) = (actual[0][6], actual[0][7], actual[0][8])
+        else:
+            (self.rubik[0][6], self.rubik[0][7], self.rubik[0][8]) = (actual[3][6], actual[3][7], actual[3][8])
+            (self.rubik[1][6], self.rubik[1][7], self.rubik[1][8]) = (actual[0][6], actual[0][7], actual[0][8])
+            (self.rubik[2][6], self.rubik[2][7], self.rubik[2][8]) = (actual[1][6], actual[1][7], actual[1][8])
+            (self.rubik[3][6], self.rubik[3][7], self.rubik[3][8]) = (actual[2][6], actual[2][7], actual[2][8])
+
+        self.rotate(clockwise, self.rubik[5])
