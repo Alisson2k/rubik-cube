@@ -1,6 +1,6 @@
 import copy
 
-class Moviments:
+class Cube:
     def __init__(self):
         self.rubik = self.initialize()
 
@@ -52,8 +52,6 @@ class Moviments:
     def left(self, clockwise=True):
         actual = copy.deepcopy(self.rubik)
 
-        # in order, GREEN - BLUE - WHITE - YELLOW
-
         if clockwise:
             (self.rubik[0][0], self.rubik[0][3], self.rubik[0][6]) = (actual[4][0], actual[4][3], actual[4][6])
             (self.rubik[2][2], self.rubik[2][5], self.rubik[2][8]) = (actual[5][6], actual[5][3], actual[5][0])
@@ -62,9 +60,9 @@ class Moviments:
 
         else:
             (self.rubik[0][0], self.rubik[0][3], self.rubik[0][6]) = (actual[5][0], actual[5][3], actual[5][6])
-            (self.rubik[2][2], self.rubik[2][5], self.rubik[2][8]) = (actual[4][2], actual[4][5], actual[4][8])
+            (self.rubik[2][2], self.rubik[2][5], self.rubik[2][8]) = (actual[4][6], actual[4][3], actual[4][0])
             (self.rubik[4][0], self.rubik[4][3], self.rubik[4][6]) = (actual[0][0], actual[0][3], actual[0][6])
-            (self.rubik[5][0], self.rubik[5][3], self.rubik[5][6]) = (actual[2][0], actual[2][3], actual[2][6])
+            (self.rubik[5][0], self.rubik[5][3], self.rubik[5][6]) = (actual[2][8], actual[2][5], actual[2][2])
 
         self.rotate(clockwise, self.rubik[1])
 
@@ -116,3 +114,37 @@ class Moviments:
             (self.rubik[3][6], self.rubik[3][7], self.rubik[3][8]) = (actual[2][6], actual[2][7], actual[2][8])
 
         self.rotate(clockwise, self.rubik[5])
+    
+    def face(self, clockwise=True):
+        actual = copy.deepcopy(self.rubik)
+
+        if clockwise:
+            (self.rubik[1][2], self.rubik[1][5], self.rubik[1][8]) = (actual[5][0], actual[5][1], actual[5][2])    
+            (self.rubik[3][0], self.rubik[3][3], self.rubik[3][6]) = (actual[4][6], actual[4][7], actual[4][8])
+            (self.rubik[4][6], self.rubik[4][7], self.rubik[4][8]) = (actual[1][8], actual[1][5], actual[1][2])
+            (self.rubik[5][0], self.rubik[5][1], self.rubik[5][2]) = (actual[3][6], actual[3][3], actual[3][0])
+        else:
+            (self.rubik[1][2], self.rubik[1][5], self.rubik[1][8]) = (actual[4][8], actual[4][7], actual[4][6])
+            (self.rubik[3][0], self.rubik[3][3], self.rubik[3][6]) = (actual[5][2], actual[5][1], actual[5][0])
+            (self.rubik[4][6], self.rubik[4][7], self.rubik[4][8]) = (actual[3][0], actual[3][3], actual[3][6])
+            (self.rubik[5][0], self.rubik[5][1], self.rubik[5][2]) = (actual[1][2], actual[1][5], actual[1][8])
+
+        self.rotate(clockwise, self.rubik[0])
+
+    def back(self, clockwise=True):
+        actual = copy.deepcopy(self.rubik)
+
+        if clockwise:
+            (self.rubik[1][0], self.rubik[1][3], self.rubik[1][6]) = (actual[4][2], actual[4][1], actual[4][0])    
+            (self.rubik[3][2], self.rubik[3][5], self.rubik[3][8]) = (actual[5][8], actual[5][7], actual[5][6])
+            (self.rubik[4][0], self.rubik[4][1], self.rubik[4][2]) = (actual[3][2], actual[3][5], actual[3][8])
+            (self.rubik[5][6], self.rubik[5][7], self.rubik[5][8]) = (actual[1][0], actual[1][3], actual[1][6])
+            
+            
+        else:
+            (self.rubik[1][0], self.rubik[1][3], self.rubik[1][6]) = (actual[5][6], actual[5][7], actual[5][8])
+            (self.rubik[3][2], self.rubik[3][5], self.rubik[3][8]) = (actual[4][0], actual[4][1], actual[4][2])
+            (self.rubik[4][0], self.rubik[4][1], self.rubik[4][2]) = (actual[1][8], actual[1][5], actual[1][2])
+            (self.rubik[5][6], self.rubik[5][7], self.rubik[5][8]) = (actual[3][8], actual[3][5], actual[3][2])
+
+        self.rotate(clockwise, self.rubik[2])
