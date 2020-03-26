@@ -1,5 +1,6 @@
 import copy
 
+default = ["L", "L'", "L2", "R", "R'", "R2", "U", "U'", "U2", "D", "D'", "D2","F", "F'", "F2", "B", "B'", "B2"]
 class Cube:
     def __init__(self):
         self.rubik = self.initialize()
@@ -148,3 +149,56 @@ class Cube:
             (self.rubik[5][6], self.rubik[5][7], self.rubik[5][8]) = (actual[3][8], actual[3][5], actual[3][2])
 
         self.rotate(clockwise, self.rubik[2])
+
+    def apply(self, moviments=[]):
+        for move in moviments:
+            if move not in default:
+                print("nao existe esse movimento")
+
+            if len(move) == 1:
+                if move[0] == "L":
+                    self.left()
+                elif move[0] == "R":
+                    self.rigth()
+                elif move[0] == "U":
+                    self.up()
+                elif move[0] == "D":
+                    self.down()
+                elif move[0] == "F":
+                    self.face()
+                elif move[0] == "B":
+                    self.back()
+
+            elif move[1] == "'":
+                if move[0]== "L":
+                    self.left(False)
+                elif move[0]== "R":
+                    self.rigth(False)
+                elif move[0]== "U":
+                    self.up(False)
+                elif move[0]== "D":
+                    self.down(False)
+                elif move[0]== "F":
+                    self.face(False)
+                elif move[0]== "B":
+                    self.back(False)
+
+            elif move[1] == "2":
+                if move[0] == "L":
+                    self.left()
+                    self.left()
+                elif move[0] == "R":
+                    self.rigth()
+                    self.rigth()
+                elif move[0] == "U":
+                    self.up()
+                    self.up()
+                elif move[0] == "D":
+                    self.down()
+                    self.down()
+                elif move[0] == "F":
+                    self.face()
+                    self.face()
+                elif move[0] == "B":
+                    self.back()
+                    self.back()
